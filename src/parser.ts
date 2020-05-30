@@ -1,5 +1,5 @@
 import { Token, TokenType } from "./tokenizer";
-enum AstType {
+export enum AstType {
   Object = "object",
   Array = "array",
   String = "string",
@@ -8,16 +8,16 @@ enum AstType {
   KeyValue = "key_value"
 }
 
-type AstNumber = { type: typeof AstType.Number; value: number };
-type AstString = { type: typeof AstType.String; value: string };
-type AstBoolean = { type: typeof AstType.Boolean; value: boolean };
-type AstArray = { type: typeof AstType.Array; value: Ast[] };
-type AstKeyValue = {
+export type AstNumber = { type: typeof AstType.Number; value: number };
+export type AstString = { type: typeof AstType.String; value: string };
+export type AstBoolean = { type: typeof AstType.Boolean; value: boolean };
+export type AstArray = { type: typeof AstType.Array; value: Ast[] };
+export type AstKeyValue = {
   type: typeof AstType.KeyValue;
   value: { key: AstString; value: Ast };
 };
-type AstObject = { type: typeof AstType.Object; value: AstKeyValue[] };
-type Ast =
+export type AstObject = { type: typeof AstType.Object; value: AstKeyValue[] };
+export type Ast =
   | AstObject
   | AstArray
   | AstString

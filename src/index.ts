@@ -1,69 +1,23 @@
 import { tokenize } from "./tokenizer";
 import { parseItem } from "./parser";
+import { format } from "./formatter";
 
-const json = `{
-  "colors": [
-    {
-      "color": "black",
-      "category": "hue",
-      "type": "primary",
-      "code": {
-        "rgba": [255,255,255,1],
-        "hex": "#000"
-      }
-    },
-    {
-      "color": "white",
-      "category": "value",
-      "code": {
-        "rgba": [0,0,0,1],
-        "hex": "#FFF"
-      }
-    },
-    {
-      "color": "red",
-      "category": "hue",
-      "type": "primary",
-      "code": {
-        "rgba": [255,0,0,1],
-        "hex": "#FF0"
-      }
-    },
-    {
-      "color": "blue",
-      "category": "hue",
-      "type": "primary",
-      "code": {
-        "rgba": [0,0,255,1],
-        "hex": "#00F"
-      }
-    },
-    {
-      "color": "yellow",
-      "category": "hue",
-      "type": "primary",
-      "code": {
-        "rgba": [255,255,0,1],
-        "hex": "#FF0"
-      }
-    },
-    {
-      "color": "green",
-      "category": "hue",
-      "type": "secondary",
-      "code": {
-        "rgba": [0,255,0,1],
-        "hex": "#0F0"
-      }
-    },
-  ]
-}`;
-
+const json = `{"menu": {  "id": "file",
+  "value": "File",
+  "popup": {
+    "menuitem": [      {"value": "New", "onclick": "CreateNewDoc()"},
+      {"value": "Open", "onclick": "OpenDoc()"},
+      {"value": "Close", "onclick": "CloseDoc()"}
+    ]
+  }
+}}`;
 const tokens = tokenize(json);
+
 let result = "";
 try {
   const [ast] = parseItem(tokens);
-  result = JSON.stringify(ast, null, 2);
+  result = format(ast);
+  // result = JSON.stringify(ast, null, 2);
 } catch (e) {
   result = `parser error: "${e.message}"`;
 }
